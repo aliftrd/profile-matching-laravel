@@ -28,12 +28,13 @@ class Sessions extends Page implements HasTable
             ->searchable(false)
             ->columns([
                 TextColumn::make('ip_address')
-                    ->label('IP Address'),
+                    ->label(__('session.column.ip')),
                 TextColumn::make('user_agent')
-                    ->label('User Agent')
+                    ->label(__('session.column.ua'))
+                    ->wrap()
                     ->searchable(),
                 TextColumn::make('last_activity')
-                    ->label('Last Activity')
+                    ->label(__('session.column.last_activity'))
                     ->since()
                     ->sortable(),
             ])
@@ -46,5 +47,10 @@ class Sessions extends Page implements HasTable
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public function getHeading(): string
+    {
+        return __('session.nav.label');
     }
 }
