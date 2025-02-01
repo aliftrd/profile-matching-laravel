@@ -28,5 +28,6 @@ return [
     */
 
     'nav.label' => 'Pengguna',
+    'nav.group' => 'Menejemen Pengguna',
     'nav.icon' => 'heroicon-o-users'
 ];
