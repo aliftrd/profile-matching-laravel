@@ -91,7 +91,12 @@ class UserResource extends Resource
         return __('user.nav.label');
     }
 
-    public static function getNavigationIcon(): string|Htmlable|null
+    public static function getNavigationGroup(): ?string
+    {
+        return __('user.nav.group');
+    }
+
+    public static function getNavigationIcon(): ?string
     {
         return __('user.nav.icon');
     }
