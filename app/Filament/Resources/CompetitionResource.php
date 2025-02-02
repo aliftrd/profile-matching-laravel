@@ -3,10 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CompetitionResource\Pages;
-use App\Filament\Resources\CompetitionResource\RelationManagers\CompetitionCriteriasRelationManager;
+use App\Filament\Resources\CompetitionResource\Pages\ManageCompetitionCriterias;
 use App\Models\Competition;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -22,15 +24,19 @@ class CompetitionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label(__('competition.field.name'))
-                    ->required(),
-                Forms\Components\Select::make('major_id')
-                    ->label(__('competition.field.major'))
-                    ->relationship('major', 'name')
-                    ->preload()
-                    ->searchable()
-                    ->required(),
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label(__('competition.field.name'))
+                            ->required(),
+                        Forms\Components\Select::make('majors')
+                            ->label(__('competition.field.major'))
+                            ->relationship('majors', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
+                            ->required(),
+                    ])
             ]);
     }
 
@@ -42,22 +48,28 @@ class CompetitionResource extends Resource
                     ->label(__('competition.column.name'))
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('major.name')
+                Tables\Columns\TextColumn::make('majors.name')
                     ->label(__('competition.column.major'))
-                    ->searchable()
-                    ->sortable(),
+                    ->badge()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label(__('competition.column.updated_at'))
                     ->since()
-                    ->searchable()
                     ->sortable(),
             ])
             ->filters([
-                //
+                // 
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\Action::make('criterias')
+                        ->label(__('competition.nav.criteria.title'))
+                        ->icon(__('competition.nav.criteria.icon'))
+                        ->color('info')
+                        ->url(fn($record) => ManageCompetitionCriterias::getUrl(['record' => $record])),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -66,19 +78,17 @@ class CompetitionResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            CompetitionCriteriasRelationManager::class,
-        ];
-    }
-
     public static function getLabel(): ?string
     {
         return __('competition.nav.label');
     }
 
-    public static function getNavigationIcon(): string|Htmlable|null
+    public static function getNavigationGroup(): ?string
+    {
+        return __('competition.nav.group');
+    }
+
+    public static function getNavigationIcon(): ?string
     {
         return __('competition.nav.icon');
     }
@@ -89,6 +99,7 @@ class CompetitionResource extends Resource
             'index' => Pages\ListCompetitions::route('/'),
             'create' => Pages\CreateCompetition::route('/create'),
             'edit' => Pages\EditCompetition::route('/{record}/edit'),
+            'criterias' => Pages\ManageCompetitionCriterias::route('/{record}/criterias'),
         ];
     }
 }

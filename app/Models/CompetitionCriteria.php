@@ -22,4 +22,9 @@ class CompetitionCriteria extends Model
     {
         return $this->belongsTo(Competition::class);
     }
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class);
+    }
 }

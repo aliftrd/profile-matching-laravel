@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Competition extends Model
 {
-    protected $fillable = ['name', 'major_id'];
+    protected $fillable = ['name'];
 
-    public function major()
+    public function majors()
     {
-        return $this->belongsTo(Major::class);
+        return $this->belongsToMany(Major::class);
     }
 
     public function criterias()
