@@ -7,7 +7,9 @@ return [
     |--------------------------------------------------------------------------
     */
 
+    'column.nisn' => 'NISN',
     'column.name' => 'Nama',
+    'column.classroom' => 'Kelas',
     'column.major' => 'Jurusan',
     'column.updated_at' => 'Dirubah',
 
@@ -17,7 +19,9 @@ return [
     |--------------------------------------------------------------------------
     */
 
+    'field.nisn' => 'NISN',
     'field.name' => 'Nama',
+    'field.classroom' => 'Kelas',
     'field.major' => 'Jurusan',
 
     /*
@@ -28,7 +32,7 @@ return [
 
     'nav.label' => 'Siswa',
     'nav.group' => 'Akademik',
-    'nav.icon' => 'heroicon-o-academic-cap',
+    'nav.icon' => 'heroicon-o-user-group',
     'nav.score.label' => 'Nilai',
     'nav.score.icon' =>  'heroicon-o-clipboard-document-list'
 ];

@@ -35,7 +35,7 @@ class MaxCompetitionCriteriaTotalWeight implements ValidationRule
         $totalWeight += $value;
 
         if ($totalWeight > $this->maxTotalWeight) {
-            $fail(__('competition-criteria.validation.max_criteria_total_weight', [
+            $fail(__('competition.validation.criteria.max_criteria_total_weight', [
                 'max' => $this->maxTotalWeight,
             ]));
         }

@@ -8,6 +8,7 @@ use App\Models\Major;
 use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -38,22 +39,32 @@ class MajorResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('major.column.updated_at'))
+                    ->label(__('user.column.updated_at'))
                     ->since()
-                    ->searchable()
-                    ->sortable(),
+                    ->toggleable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteAction::make()
+                    ->using(function ($data, $record) {
+                        if (
+                            $record->subjects()->count() > 0 ||
+                            $record->competitions()->count() > 0 ||
+                            $record->students()->count() > 0
+                        ) {
+                            Notification::make()
+                                ->danger()
+                                ->title(__('notifications.data_is_in_use'))
+                                ->send();
+
+                            return;
+                        }
+
+                        return $record->delete();
+                    }),
             ]);
     }
 
@@ -67,6 +78,11 @@ class MajorResource extends Resource
     public static function getLabel(): ?string
     {
         return __('major.nav.label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('major.nav.group');
     }
 
     public static function getNavigationIcon(): string|Htmlable|null

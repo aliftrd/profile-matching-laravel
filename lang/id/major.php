@@ -24,6 +24,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
+    'nav.group' => 'Akademik',
     'nav.label' => 'Jurusan',
     'nav.icon' => 'heroicon-o-academic-cap'
 ];

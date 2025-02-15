@@ -26,6 +26,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
+    'nav.group' => 'Akademik',
     'nav.label' => 'Mata Pelajaran',
     'nav.icon' => 'heroicon-o-book-open'
 ];

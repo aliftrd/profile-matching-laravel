@@ -13,7 +13,7 @@ return [
     'column.criteria.name' => 'Nama',
     'column.criteria.weight' => 'Bobot',
     'column.criteria.type' => 'Tipe',
-    'column.criteria.subject' => 'Mata Pelajaran',
+    'column.criteria.subjects' => 'Mata Pelajaran Terkait',
     'column.criteria.updated_at' => 'Dirubah',
 
     /*
@@ -27,7 +27,9 @@ return [
     'field.criteria.name' => 'Nama',
     'field.criteria.weight' => 'Bobot',
     'field.criteria.type' => 'Tipe',
+    'field.criteria.subjects' => 'Mata Pelajaran Terkait',
     'field.criteria.subject' => 'Mata Pelajaran',
+    'field.criteria.subject-weight' => 'Bobot',
 
     /*
     |--------------------------------------------------------------------------
@@ -36,6 +38,7 @@ return [
     */
 
     'validation.criteria.max_criteria_total_weight' => 'Total bobot kriteria tidak boleh melebihi :max%',
+    'validation.criteria.max_subject_total_weight' => 'Total bobot mata pelajaran tidak boleh melebihi :max%',
 
     /*
     |--------------------------------------------------------------------------
@@ -48,5 +51,8 @@ return [
     'nav.icon' => 'heroicon-o-trophy',
     'nav.criteria.title' => 'Kriteria',
     'nav.criteria.label' => 'Kriteria Lomba',
-    'nav.criteria.icon' => 'heroicon-o-numbered-list'
+    'nav.criteria.icon' => 'heroicon-o-numbered-list',
+    'nav.candidate.title' => 'Kandidat',
+    'nav.candidate.label' => 'Kandidat Lomba',
+    'nav.candidate.icon' => 'heroicon-o-trophy'
 ];
