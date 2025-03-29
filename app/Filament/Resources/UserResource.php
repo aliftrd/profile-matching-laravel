@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use App\Traits\HasActiveIcon;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
+    use HasActiveIcon;
     protected static ?string $model = User::class;
 
     public static function form(Form $form): Form

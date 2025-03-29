@@ -21,7 +21,8 @@ return new class extends Migration
             $table->foreignIdFor(Subject::class)
                 ->constrained()
                 ->cascadeOnDelete();
-            $table->integer('weight');
+            $table->float('target_score');
+            $table->string('type');
         });
     }
 

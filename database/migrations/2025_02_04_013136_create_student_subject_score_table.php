@@ -14,12 +14,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_subject_score', function (Blueprint $table) {
-            $table->string('student_nisn')
-                ->foreign('student_nisn')
+            $table->foreignIdFor(Student::class)
                 ->constrained()
+                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->foreignIdFor(Subject::class)
                 ->constrained()
+                ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->float('score');
         });

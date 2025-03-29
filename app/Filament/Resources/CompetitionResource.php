@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Imports\StudentImporter;
 use App\Filament\Resources\CompetitionResource\Pages;
 use App\Filament\Resources\CompetitionResource\RelationManagers;
 use App\Models\Competition;
+use App\Traits\HasActiveIcon;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CompetitionResource extends Resource
 {
+    use HasActiveIcon;
     protected static ?string $model = Competition::class;
 
     public static function form(Form $form): Form

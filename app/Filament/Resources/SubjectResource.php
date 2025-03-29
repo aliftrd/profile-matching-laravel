@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubjectResource\Pages;
 use App\Models\Subject;
+use App\Traits\HasActiveIcon;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,6 +14,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 class SubjectResource extends Resource
 {
+    use HasActiveIcon;
     protected static ?string $model = Subject::class;
 
     public static function form(Form $form): Form

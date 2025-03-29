@@ -10,12 +10,15 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
 
-class Sessions extends Page implements HasTable
+class WebSession extends Page implements HasTable
 {
     use HasPageShield, InteractsWithTable;
 
     protected static ?string $model = Session::class;
+
+    protected static ?string $slug = 'session';
 
     protected static bool $shouldRegisterNavigation = false;
 
@@ -47,6 +50,11 @@ class Sessions extends Page implements HasTable
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public function getTitle(): string | Htmlable
+    {
+        return __('session.nav.label');
     }
 
     public function getHeading(): string

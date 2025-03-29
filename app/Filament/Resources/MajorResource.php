@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\MajorResource\Pages;
 use App\Filament\Resources\MajorResource\RelationManagers;
 use App\Models\Major;
+use App\Traits\HasActiveIcon;
 use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class MajorResource extends Resource
 {
+    use HasActiveIcon;
     protected static ?string $model = Major::class;
 
     public static function form(Form $form): Form

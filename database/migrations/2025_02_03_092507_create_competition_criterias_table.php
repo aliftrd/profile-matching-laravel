@@ -19,7 +19,6 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->string('name');
             $table->integer('weight');
-            $table->string('type');
             $table->timestamps();
         });
     }

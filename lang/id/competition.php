@@ -12,7 +12,6 @@ return [
     'column.updated_at' => 'Dirubah',
     'column.criteria.name' => 'Nama',
     'column.criteria.weight' => 'Bobot',
-    'column.criteria.type' => 'Tipe',
     'column.criteria.subjects' => 'Mata Pelajaran Terkait',
     'column.criteria.updated_at' => 'Dirubah',
 
@@ -26,10 +25,10 @@ return [
     'field.major' => 'Jurusan',
     'field.criteria.name' => 'Nama',
     'field.criteria.weight' => 'Bobot',
-    'field.criteria.type' => 'Tipe',
     'field.criteria.subjects' => 'Mata Pelajaran Terkait',
     'field.criteria.subject' => 'Mata Pelajaran',
-    'field.criteria.subject-weight' => 'Bobot',
+    'field.criteria.subject.type' => 'Tipe',
+    'field.criteria.subject.target-score' => 'Nilai Ideal',
 
     /*
     |--------------------------------------------------------------------------

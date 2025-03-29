@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Http\Middleware\UpgradeToHttpsUnderNgrok;
 use Filament\Http\Middleware\Authenticate;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -32,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Emerald,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -43,19 +44,18 @@ class AdminPanelProvider extends PanelProvider
                     ->label(__('user.nav.group')),
             ])
             ->userMenuItems([
+                'profile' => MenuItem::make()
+                    ->url(fn(): string => \App\Filament\Pages\Profile::getUrl())
+                    ->hidden(fn(): bool => !auth()->user()->can('page_Profile')),
                 MenuItem::make()
                     ->label(__('session.nav.label'))
                     ->icon(__('session.nav.icon'))
-                    ->url(fn(): string => \App\Filament\Pages\Sessions::getUrl())
-                    ->hidden(fn(): bool => !auth()->user()->can('page_Sessions')),
-            ])
-            ->pages([
-                Pages\Dashboard::class,
+                    ->url(fn(): string => \App\Filament\Pages\WebSession::getUrl())
+                    ->hidden(fn(): bool => !Filament::auth()->user()->can('page_WebSession')),
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\AccountWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -75,6 +75,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->sidebarFullyCollapsibleOnDesktop();
+            ->sidebarCollapsibleOnDesktop()
+            ->collapsibleNavigationGroups(false);
     }
 }

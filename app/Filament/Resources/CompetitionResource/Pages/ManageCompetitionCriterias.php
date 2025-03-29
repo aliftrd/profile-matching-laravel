@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\CompetitionResource\Pages;
 
-use App\Enum\CompetitionCriteriaType;
+use App\Enum\CompetitionCriteriaSubjectType;
 use App\Filament\Resources\CompetitionCriteriaResource;
 use App\Filament\Resources\CompetitionResource;
 use App\Rules\MaxCompetitionCriteriaTotalWeight;
@@ -48,13 +48,6 @@ class ManageCompetitionCriterias extends ManageRelatedRecords
                     ),
                 ])
                 ->required(),
-            Forms\Components\Select::make('type')
-                ->label(__('competition.field.criteria.type'))
-                ->options(CompetitionCriteriaType::class)
-                ->preload()
-                ->searchable()
-                ->columnSpanFull()
-                ->required(),
             TableRepeater::make('subjects')
                 ->label(__('competition.field.criteria.subjects'))
                 ->relationship('criteriaSubjects')
@@ -79,25 +72,20 @@ class ManageCompetitionCriterias extends ManageRelatedRecords
                         ->disableOptionsWhenSelectedInSiblingRepeaterItems()
                         ->required(),
 
-                    Forms\Components\TextInput::make('weight')
-                        ->label(__('competition.field.criteria.weight'))
+                    Forms\Components\TextInput::make('target_score')
+                        ->label(__('competition.field.criteria.subject.target-score'))
                         ->numeric()
                         ->default(0)
                         ->minValue(0)
-                        // When editing, we want to allow the current row’s value.
-                        // So we subtract the sum of all rows’ weights, then add back the current row’s weight.
-                        ->maxValue(fn($get, $state) => max(
-                            0,
-                            100 - (array_sum(
-                                collect($get('subjects'))
-                                    ->pluck('weight')
-                                    ->map(fn($weight) => (int) $weight) // Ensure all values are integers
-                                    ->toArray()
-                            ) - ($state ?? 0))
-                        ))
-                        ->suffix('%')
                         ->required()
                         ->reactive(),
+                    Forms\Components\Select::make('type')
+                        ->label(__('competition.field.criteria.subject.type'))
+                        ->options(CompetitionCriteriaSubjectType::class)
+                        ->preload()
+                        ->searchable()
+                        ->columnSpanFull()
+                        ->required(),
                 ])
                 ->addable(fn($get) => array_sum(
                     collect($get('subjects'))
@@ -149,13 +137,11 @@ class ManageCompetitionCriterias extends ManageRelatedRecords
                         default => 'success',
                     })
                     ->sortable(),
-                Tables\Columns\TextColumn::make('type')
-                    ->label(__('competition.column.criteria.type'))
-                    ->badge(),
                 Tables\Columns\TextColumn::make('subjects')
                     ->label(__('competition.column.criteria.subjects'))
-                    ->formatStateUsing(fn($state) => $state->name . ' (' . $state->pivot->weight . '%)')
-                    ->badge(),
+                    ->formatStateUsing(fn($state) => $state->name . ' (' . $state->pivot->type->getLabel() . ')')
+                    ->badge()
+                    ->color(fn($state) => $state->pivot->type->getColor()),
             ])
             ->filters([
                 //

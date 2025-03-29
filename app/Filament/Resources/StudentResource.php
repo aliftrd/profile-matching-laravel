@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers;
 use App\Models\Student;
+use App\Traits\HasActiveIcon;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class StudentResource extends Resource
 {
+    use HasActiveIcon;
     protected static ?string $model = Student::class;
 
     public static function form(Form $form): Form
@@ -50,6 +52,7 @@ class StudentResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nisn')
                     ->label(__('student.column.nisn'))
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('student.column.name'))

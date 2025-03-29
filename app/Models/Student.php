@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    protected $primaryKey = 'nisn';
-
-    public $incrementing = false;
-    protected $keyType = 'string';
-
     protected $fillable = [
         'nisn',
         'major_id',
