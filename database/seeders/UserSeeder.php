@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('alifgg12')
         ]);
 
-        // Artisan::call('shield:generate --all');
-        // Artisan::call('shield:super-admin');
+        Artisan::call('shield:generate --all');
+        Artisan::call('shield:super-admin');
     }
 }
