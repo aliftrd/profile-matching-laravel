@@ -28,7 +28,7 @@ return [
 
     'panel_user' => [
         'enabled' => true,
-        'name' => 'panel_user',
+        'name' => 'user',
     ],
 
     'permission_prefixes' => [
@@ -53,7 +53,7 @@ return [
 
     'entities' => [
         'pages' => true,
-        'widgets' => true,
+        'widgets' => false,
         'resources' => true,
         'custom_permissions' => false,
     ],

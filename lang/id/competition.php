@@ -46,7 +46,7 @@ return [
     */
 
     'nav.label' => 'Bidang Lomba',
-    'nav.group' => 'Lomba',
+    'nav.group' => 'Akademik',
     'nav.icon' => 'heroicon-o-trophy',
     'nav.criteria.title' => 'Kriteria',
     'nav.criteria.label' => 'Kriteria Lomba',

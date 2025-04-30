@@ -67,4 +67,9 @@ class ManageStudentSubjectScore extends ManageRelatedRecords
             ])
             ->paginated(false);
     }
+
+    public function getTitle(): string
+    {
+        return __('student.nav.score.title', ['name' => str($this->record->name)->title()]);
+    }
 }

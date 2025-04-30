@@ -44,7 +44,7 @@ class ManageCompetitionCriterias extends ManageRelatedRecords
                 ->rules([
                     new MaxCompetitionCriteriaTotalWeight(
                         ownerRecord: $this->getOwnerRecord(),
-                        currentCriteriaId: $this->record?->id,
+                        currentCriteriaId: $this->mountedTableActionRecord,
                     ),
                 ])
                 ->required(),

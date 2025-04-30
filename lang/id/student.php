@@ -34,5 +34,6 @@ return [
     'nav.group' => 'Akademik',
     'nav.icon' => 'heroicon-o-user-group',
     'nav.score.label' => 'Nilai',
-    'nav.score.icon' =>  'heroicon-o-clipboard-document-list'
+    'nav.score.icon' =>  'heroicon-o-clipboard-document-list',
+    'nav.score.title' => 'Nilai :name',
 ];

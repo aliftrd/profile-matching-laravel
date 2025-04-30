@@ -57,15 +57,13 @@ class CompetitionResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\Action::make('criteria')
-                        ->label(__('competition.nav.criteria.title'))
-                        ->icon(__('competition.nav.criteria.icon'))
-                        ->color('gray')
-                        ->url(fn($record) => Pages\ManageCompetitionCriterias::getUrl(['record' => $record])),
-                    Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
-                ]),
+                Tables\Actions\Action::make('criteria')
+                    ->label(__('competition.nav.criteria.title'))
+                    ->icon(__('competition.nav.criteria.icon'))
+                    ->color('gray')
+                    ->url(fn($record) => Pages\ManageCompetitionCriterias::getUrl(['record' => $record])),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ]);
     }
 
@@ -80,6 +78,11 @@ class CompetitionResource extends Resource
     public static function getLabel(): ?string
     {
         return __('competition.nav.label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('competition.nav.group');
     }
 
     public static function getNavigationIcon(): string|Htmlable|null
